@@ -4,18 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geolocation MapTiler</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
-    <label for="inputKota">Cari Lokasi: </label>
-    <input type="text" id="inputKota" placeholder="Contoh: Jakarta" value="Jakarta">
-    <button onclick="cariLokasi()">Cari</button>
-    <br><br>
-    <p><strong>Lokasi (Input):</strong> <span id="lokasi">-</span></p>
-    <p><strong>Negara:</strong> <span id="negara">-</span></p>
-    <p><strong>Provinsi:</strong> <span id="provinsi">-</span></p>
-    <p><strong>Kecamatan:</strong> <span id="kecamatan">-</span></p>
-    <p><strong>Longitude:</strong> <span id="longitude">-</span></p>
-    <p><strong>Latitude:</strong> <span id="latitude">-</span></p>
+<body class="bg-slate-100 min-h-screen flex items-center justify-center p-4 text-slate-800">
+
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-100 w-full max-w-md p-6 space-y-6">
+        
+        <div class="border-b border-slate-100 pb-4">
+            <h1 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                <i data-lucide="map-pin" class="text-indigo-600 w-5 h-5"></i> Geolocation Finder
+            </h1>
+            <div class="mt-2 text-xs text-slate-500 space-y-1 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                <p><span class="font-semibold text-slate-700">Nama:</span> Gibran Saputra</p>
+                <p><span class="font-semibold text-slate-700">NIM:</span> 20240140163</p>
+            </div>
+        </div>
+
+        <div class="space-y-2">
+            <label for="inputKota" class="block text-xs font-semibold text-slate-600 uppercase tracking-wider">Cari Lokasi</label>
+            <div class="flex gap-2">
+                <input type="text" id="inputKota" placeholder="Contoh: Kasihan, Bantul" value="Jakarta"
+                    class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all">
+                <button onclick="cariLokasi()" 
+                    class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-medium text-sm transition-all flex items-center gap-1.5 shadow-sm active:scale-95">
+                    <i data-lucide="search" class="w-4 h-4"></i> Cari
+                </button>
+            </div>
+        </div>
+
+        <div class="space-y-3">
+            <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Hasil Pencarian</h2>
+            
+            <div class="grid grid-cols-1 gap-2.5 text-sm">
+                
+                <div class="bg-indigo-50 border border-indigo-100 p-3 rounded-xl flex justify-between items-center">
+                    <span class="text-indigo-900 font-medium flex items-center gap-2">
+                        <i data-lucide="compass" class="w-4 h-4 text-indigo-600"></i> Lokasi (Input)
+                    </span>
+                    <span id="lokasi" class="font-bold text-indigo-700">-</span>
+                </div>
+
+                <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl space-y-2">
+                    <div class="flex justify-between items-center border-b border-slate-200/60 pb-2">
+                        <span class="text-slate-500 text-xs">Negara</span>
+                        <span id="negara" class="font-semibold text-slate-800">-</span>
+                    </div>
+                    <div class="flex justify-between items-center border-b border-slate-200/60 pb-2">
+                        <span class="text-slate-500 text-xs">Provinsi</span>
+                        <span id="provinsi" class="font-semibold text-slate-800">-</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-500 text-xs">Kecamatan / Area</span>
+                        <span id="kecamatan" class="font-semibold text-slate-800">-</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5">
+                    <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl">
+                        <span class="text-slate-400 text-xs block mb-1">Longitude</span>
+                        <span id="longitude" class="font-mono font-semibold text-slate-800 text-xs block truncate">-</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-100 p-3 rounded-xl">
+                        <span class="text-slate-400 text-xs block mb-1">Latitude</span>
+                        <span id="latitude" class="font-mono font-semibold text-slate-800 text-xs block truncate">-</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 
     <script>
         function cariLokasi() {
@@ -42,7 +101,10 @@
                 });
         }
 
-        window.onload = cariLokasi;
+        window.onload = () => {
+            cariLokasi();
+            lucide.createIcons();
+        };
     </script>
 
 </body>
