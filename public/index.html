@@ -16,5 +16,34 @@
     <p><strong>Kecamatan:</strong> <span id="kecamatan">-</span></p>
     <p><strong>Longitude:</strong> <span id="longitude">-</span></p>
     <p><strong>Latitude:</strong> <span id="latitude">-</span></p>
+
+    <script>
+        function cariLokasi() {
+            const inputKota = document.getElementById("inputKota").value;
+
+            fetch(`/api/lokasi?kota=${encodeURIComponent(inputKota)}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("Gagal mengambil data");
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Data diterima:", data);
+
+                    document.getElementById("lokasi").innerText = data.kota;
+                    document.getElementById("negara").innerText = data.negara;
+                    document.getElementById("provinsi").innerText = data.provinsi;
+                    document.getElementById("kecamatan").innerText = data.kecamatan;
+                    document.getElementById("longitude").innerText = data.longitude;
+                    document.getElementById("latitude").innerText = data.latitude;
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Lokasi tidak ditemukan atau terjadi kesalahan server.");
+                });
+        }
+
+        window.onload = cariLokasi;
+    </script>
+
 </body>
 </html>
